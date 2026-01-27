@@ -1,7 +1,9 @@
 import os
 
 # Base path for 2025 tasks
-BASE_PATH = r"\\spatialfiles2\work\FOR\RSI\SA\Tasks\2025"
+#BASE_PATH = r"\\spatialfiles2\work\FOR\RSI\SA\Tasks\2025"
+# Base path for 2026 tasks
+BASE_PATH = r"\\spatialfiles2\work\FOR\RSI\SA\Tasks\2026"
 
 # Ask user for task number
 task_number = input("Enter Task Number: ").strip()
