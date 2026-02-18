@@ -48,6 +48,10 @@ WORD_PAIRS = [
     ("як", "как"),
     ("кількість", "количество"),
     ("увага", "внимание"),
+
+]
+
+"""
     ("тільки", "только"),
     ("дитячий", "детский"),
     ("інших", "других"),
@@ -91,9 +95,7 @@ WORD_PAIRS = [
     ("роботу", "работу"),
     ("необхідно", "необходимо"),
     ("років", "лет"),
-]
-
-
+"""
 
 category = 'Common_words'
 
@@ -103,7 +105,9 @@ TZ = 0
 
 # Rate limiting / retry behavior
 SLEEP_BETWEEN_REQUESTS_SEC = (10.0, 20.0)  # original   (1.0, 2.0) 
-MAX_RETRIES = 6
+MAX_RETRIES = 3
+REQUEST_COUNT = 0
+
 
 
 @dataclass
@@ -139,11 +143,20 @@ def _safe_interest_by_region(
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             pytrends.build_payload(kw_list=kw_list, geo=geo, timeframe=timeframe)
+            # micro-sleep to reduce "burstiness"
+            time.sleep(random.uniform(1.5, 4.0))
             df = pytrends.interest_by_region(
                 resolution=resolution,
                 inc_low_vol=inc_low_vol,
                 inc_geo_code=inc_geo_code,
             )
+            global REQUEST_COUNT
+            REQUEST_COUNT += 1
+
+            # macro-sleep every 10 successful requests
+            if REQUEST_COUNT % 10 == 0:
+                time.sleep(random.uniform(60, 120))
+
             return df
 
         except Exception as e:
@@ -162,7 +175,21 @@ def _safe_interest_by_region(
 
 
 def main() -> None:
-    pytrends = TrendReq(hl=HL, tz=TZ)
+    UA = (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/121.0.0.0 Safari/537.36"
+    )
+
+    pytrends = TrendReq(
+        hl=HL,
+        tz=TZ,
+        timeout=(10, 30),
+        requests_args={
+            "headers": {"User-Agent": UA},
+        },
+    )
+
 
     results: List[Dict[str, Any]] = []
 
