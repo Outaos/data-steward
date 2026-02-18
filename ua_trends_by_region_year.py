@@ -40,21 +40,69 @@ END_YEAR = 2025
 
 # Word pairs from your screenshot (Ukrainian Cyrillic, Russian Cyrillic)
 WORD_PAIRS = [
-    ("гроші", "деньги"),
-    ("ціна", "цена"),
-    ("робота", "работа"),
-    ("бізнес", "бизнес"),
-    ("ринок", "рынок"),
-    ("пенсія", "пенсия"),
-    ("прибуток", "прибыль"),
+
+    ("діяльність", "деятельность"),
+    ("новини", "новости"),
+    ("після", "после"),
+    ("зараз", "теперь"),
+    ("як", "как"),
+    ("кількість", "количество"),
+    ("увага", "внимание"),
+    ("тільки", "только"),
+    ("дитячий", "детский"),
+    ("інших", "других"),
+    ("купити", "купить"),
+    ("батьки", "родители"),
+    ("дитина", "ребенок"),
+    ("частина", "часть"),
+    ("діти", "дети"),
+    ("людина", "человек"),
+    ("вибір", "выбор"),
+    ("місце", "место"),
+    ("місто", "город"),
+    ("подарунок", "подарок"),
+    ("різних", "разных"),
+    ("питання", "вопрос"),
+    ("лікар", "врач"),
+    ("Росія", "Россия"),
+    ("навіть", "даже"),
+    ("шукаю", "ищу"),
+    ("має", "имеет"),
+    ("кілька", "несколько"),
+    ("допомога", "помощь"),
+    ("разом", "вместе"),
+    ("якщо", "если"),
+    ("Україна", "Украина"),
+    ("чином", "образом"),
+    ("дуже", "очень"),
+    ("Київ", "Киев"),
+    ("вірус", "вирус"),
+    ("життя", "жизнь"),
+    ("війна", "война"),
+    ("зробити", "сделать"),
+    ("що", "что"),
+    ("багато", "много"),
+    ("коли", "когда"),
+    ("ліки", "лекарство"),
+    ("яка", "какая"),
+    ("більше", "больше"),
+    ("хто", "кто"),
+    ("біля", "рядом"),
+    ("роботу", "работу"),
+    ("необхідно", "необходимо"),
+    ("років", "лет"),
 ]
+
+
+
+category = 'Common_words'
 
 # pytrends locale/timezone (timezone in minutes; 0 is fine for normalized Trends)
 HL = "uk-UA"
 TZ = 0
 
 # Rate limiting / retry behavior
-SLEEP_BETWEEN_REQUESTS_SEC = (1.0, 2.0)  # random range
+SLEEP_BETWEEN_REQUESTS_SEC = (10.0, 20.0)  # original   (1.0, 2.0) 
 MAX_RETRIES = 6
 
 
@@ -125,7 +173,7 @@ def main() -> None:
 
         for year in range(START_YEAR, END_YEAR + 1):
             timeframe = f"{year}-01-01 {year}-12-31"
-            print(f"[INFO] Pair {pair_id}/{len(WORD_PAIRS)} | Year {year} | {kw_list}")
+            #print(f"[INFO] Pair {pair_id}/{len(WORD_PAIRS)} | Year {year} | {kw_list}")
 
             df = _safe_interest_by_region(
                 pytrends=pytrends,
@@ -174,14 +222,15 @@ def main() -> None:
     #out_path = f"ua_trends_by_region_year_{START_YEAR}_{END_YEAR}.csv"
     
 
-    OUTPUT_DIR = r"V:\srm\wml\Workarea\ofedyshy"
+    OUTPUT_DIR = r"V:\srm\wml\Workarea\ofedyshy\Personal\Data Analysis\ua_lang"
+    
 
     # Ensure directory exists (safe even on network drive)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     out_path = os.path.join(
         OUTPUT_DIR,
-        f"ua_trends_by_region_year_{START_YEAR}_{END_YEAR}.csv"
+        f"{category}_ua_trends_by_region_year_{START_YEAR}_{END_YEAR}.csv"
     )
     out.to_csv(out_path, index=False, encoding="utf-8-sig")
 
