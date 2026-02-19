@@ -41,13 +41,13 @@ END_YEAR = 2025
 # Word pairs from your screenshot (Ukrainian Cyrillic, Russian Cyrillic)
 WORD_PAIRS = [
 
-    ("діяльність", "деятельность"),
-    ("новини", "новости"),
-    ("після", "после"),
-    ("зараз", "теперь"),
-    ("як", "как"),
-    ("кількість", "количество"),
-    ("увага", "внимание"),
+    ("тільки", "только"),
+    ("дитячий", "детский"),
+    ("інших", "других"),
+    ("купити", "купить"),
+    ("батьки", "родители"),
+    ("дитина", "ребенок"),
+    ("частина", "часть"),
 
 ]
 
@@ -97,14 +97,14 @@ WORD_PAIRS = [
     ("років", "лет"),
 """
 
-category = 'Common_words'
+category = 'Common_words_3'
 
 # pytrends locale/timezone (timezone in minutes; 0 is fine for normalized Trends)
 HL = "uk-UA"
 TZ = 0
 
 # Rate limiting / retry behavior
-SLEEP_BETWEEN_REQUESTS_SEC = (10.0, 20.0)  # original   (1.0, 2.0) 
+SLEEP_BETWEEN_REQUESTS_SEC = (1.0, 2.0)  # original   (1.0, 2.0) 
 MAX_RETRIES = 3
 REQUEST_COUNT = 0
 
