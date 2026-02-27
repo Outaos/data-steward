@@ -23,6 +23,7 @@ DEFAULT_CSVS = {
     "geography": r"V:\srm\wml\Workarea\ofedyshy\Personal\Data Analysis\ua_lang\Input\Geography_ua_trends_by_region_year_2011_2025.csv",
     "economy":   r"V:\srm\wml\Workarea\ofedyshy\Personal\Data Analysis\ua_lang\Input\Economy_ua_trends_by_region_year_2011_2025.csv",
     "government":r"V:\srm\wml\Workarea\ofedyshy\Personal\Data Analysis\ua_lang\Input\Government_ua_trends_by_region_year_2011_2025.csv",
+    "common_words":r"V:\srm\wml\Workarea\ofedyshy\Personal\Data Analysis\ua_lang\Input\Common_words_ua_trends_by_region_year_2011_2025.csv",
 }
 
 OUT_DIR = r"V:\srm\wml\Workarea\ofedyshy\Personal\Data Analysis\ua_lang\Output\Charts"
@@ -72,6 +73,15 @@ AREA_REGIONS = {
         "місто севастополь",
         "місто севастополь.",
         "луганська область",
+    ],
+    "KYIV": [
+        "місто київ",
+    ],
+    "TERNOPIL": [
+        "тернопільська область",
+    ],
+    "MYKOLAJIV": [
+        "миколаївська область",
     ],
 }
 
@@ -187,12 +197,12 @@ def plot_country_barchart(df_year: pd.DataFrame, language: str, title: str, out_
 
 
 def main():
-    category = "geography"   # geography, economy, government
+    category = "common_words"   # geography, economy, government
     language = "ua"          # ua or ru
     year_min = 2011
     year_max = 2025
 
-    area = "OCCUPIED_TERRITORY"             # ALL, WEST, RIGHT_BANK, LEFT_BANK, SOUTH, EAST, OCCUPIED_TERRITORY
+    area = "MYKOLAJIV"             # ALL, WEST, RIGHT_BANK, LEFT_BANK, SOUTH, EAST, OCCUPIED_TERRITORY, KYIV
     exclude_crimea = False   # independent toggle (still useful if area=ALL)
 
     out_dir = OUT_DIR

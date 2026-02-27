@@ -21,9 +21,10 @@ import matplotlib.pyplot as plt
 # -----------------------------
 # CONFIG (your paths)
 # -----------------------------
-CSV_PATH = r"V:\srm\wml\Workarea\ofedyshy\Personal\Data Analysis\ua_lang\Input\Geography_ua_trends_by_region_year_2011_2025.csv"     # Geography
+#CSV_PATH = r"V:\srm\wml\Workarea\ofedyshy\Personal\Data Analysis\ua_lang\Input\Geography_ua_trends_by_region_year_2011_2025.csv"     # Geography
 #CSV_PATH = r"V:\srm\wml\Workarea\ofedyshy\Personal\Data Analysis\ua_lang\Input\Economy_ua_trends_by_region_year_2011_2025.csv"        # Economy
 #CSV_PATH = r"V:\srm\wml\Workarea\ofedyshy\Personal\Data Analysis\ua_lang\Input\Government_ua_trends_by_region_year_2011_2025.csv"     # Government
+CSV_PATH = r"V:\srm\wml\Workarea\ofedyshy\Personal\Data Analysis\ua_lang\Input\Common_words_ua_trends_by_region_year_2011_2025.csv"     # Common_words
 
 GEO_DIR = r"V:\srm\wml\Workarea\ofedyshy\Scripts\League_Wedger\geo_data"
 NE_ADMIN1 = os.path.join(GEO_DIR, "ne_10m_admin_1_states_provinces.shp")
@@ -280,9 +281,9 @@ def plot_choropleth(gdf: gpd.GeoDataFrame, year: int, language: str, out_png: st
 
 
 def main():
-    year = 2011         #<-------------------------------------------------------------------------------------------YEAR
+    year = 2024         #<-------------------------------------------------------------------------------------------YEAR
     language = "ua"     #<-- ua or ru
-    category = "geography"           #<-- economy, geography, government
+    category = "common_words"           #<-- economy, geography, government
 
     agg = load_and_aggregate(CSV_PATH, year, language)
     ukr = load_ukraine_admin1(NE_ADMIN1)
