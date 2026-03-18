@@ -41,24 +41,18 @@ END_YEAR = 2025
 # Word pairs from your screenshot (Ukrainian Cyrillic, Russian Cyrillic)
 WORD_PAIRS = [
 
-
-    ("різати", "резать"),
-    ("солити", "солить"),
-    ("перчити", "перчить"),
-    ("мішати", "мешать"),
-    ("вареники", "пельмени"),
-    ("млинці", "блины"),
-    ("пиріг", "пирог"),
-    ("печиво", "печенье"),
-
-
+    ("шинка", "ветчина"),
+    ("пиріжки", "пирожки"),
+    ("солодощі", "сладости"),
+    ("квасоля", "фасоль"),
+    ("грінки", "гренки"),
 
 ]
 
 
 
 
-category = 'Food_5'
+category = 'Food_7'
 
 # pytrends locale/timezone (timezone in minutes; 0 is fine for normalized Trends)
 HL = "uk-UA"
