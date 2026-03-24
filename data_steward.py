@@ -1,7 +1,8 @@
 import pandas as pd
 
 # path to your CSV
-csv_path = r"V:\srm\wml\Workarea\ofedyshy\Projects\data-steward\gid_requests\GIS_Requests_2025_11_13.csv"
+#csv_path = r"V:\srm\wml\Workarea\ofedyshy\Projects\data-steward\gid_requests\GIS_Requests_2026_03_24.csv"
+csv_path = r"\\spatialfiles.bcgov\srm\wml\Workarea\ofedyshy\Projects\data-steward\gid_requests\GIS_Requests_2026_03_24.csv"
 
 # read the data frame
 df = pd.read_csv(csv_path)
@@ -37,8 +38,8 @@ print("------------------------------------------")
 
 
 # 🔹 Define date range
-start_date = pd.Timestamp('2025-06-01', tz='UTC')
-end_date   = pd.Timestamp('2025-08-30', tz='UTC')
+start_date = pd.Timestamp('2025-09-01', tz='UTC')
+end_date   = pd.Timestamp('2026-02-24', tz='UTC')
 
 # 🔹 Filter rows within range (inclusive)
 filtered = df[(df['_rcd'] >= start_date) & (df['_rcd'] <= end_date)]
