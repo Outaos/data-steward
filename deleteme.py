@@ -1,18 +1,38 @@
 import pandas as pd
-from pathlib import Path
 
-file_path = Path(r"\\spatialfiles.bcgov\srm\wml\Workarea\ofedyshy\Projects\data-steward\gid_requests\GIS_Requests_2026_03_24.csv")
+# Path to your CSV
+csv_path = r"\\spatialfiles.bcgov\srm\wml\Workarea\ofedyshy\Projects\data-steward\gid_requests\GIS_Requests_2026_03_24.csv"
 
-df = pd.read_csv(file_path)
+# Load the data
+df = pd.read_csv(csv_path)
 
-creator_col = "Created By"
+# Clean column names (avoid hidden spaces issues)
+df.columns = df.columns.str.strip()
 
-# Clean column
-df[creator_col] = df[creator_col].fillna("").astype(str).str.strip()
+print("CSV loaded successfully.")
+print(f"Total rows: {len(df)}")
 
-# Count requests per person
-counts = df[creator_col].value_counts()
+# Filter rows where Title contains 'fence' (case-insensitive)
+mask = df["Title"].str.contains("fence", case=False, na=False)
+filtered_df = df[mask]
 
-# Print results
-for person, count in counts.items():
-    print(f"{person}: {count}")
+print(f"Rows containing 'fence': {len(filtered_df)}\n")
+
+# Group by "Created By"
+grouped = (
+    filtered_df
+    .dropna(subset=["Created By"])
+    .groupby("Created By")
+    .agg({
+        "Title": "count",
+        "District Code": lambda x: sorted(set(str(v) for v in x if pd.notna(v)))
+    })
+    .rename(columns={"Title": "Fence_Count"})
+    .sort_values(by="Fence_Count", ascending=False)
+)
+
+print("Created By  →  Fence Count  →  District Code(s)\n")
+
+for name, row in grouped.iterrows():
+    districts = ", ".join(row["District Code"])
+    print(f"{name}  →  {row['Fence_Count']}  →  {districts}")
