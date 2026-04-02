@@ -5,7 +5,7 @@ import seaborn as sns
 
 print("🚀 Script started")
 
-file_path = Path(r"\\spatialfiles.bcgov\srm\wml\Workarea\ofedyshy\Projects\data-steward\gid_requests\GIS_Requests_2026_03_24.csv")
+file_path = Path(r"\\spatialfiles.bcgov\srm\wml\Workarea\ofedyshy\Other Work\GIS_SPECIALIST\SHAREPOINT_STATS\Rehab_stats\GIS_Requests_2026_04_02.csv")
 
 if not file_path.exists():
     print("❌ File does NOT exist!")
@@ -80,7 +80,7 @@ from matplotlib.colors import Normalize
 
 sns.set(style="whitegrid")
 
-output_folder = Path(r"\\spatialfiles.bcgov\srm\wml\Workarea\ofedyshy\Other Work\SHAREPOINT_STATS\Rehab_stats\Outputs")
+output_folder = Path(r"\\spatialfiles.bcgov\srm\wml\Workarea\ofedyshy\Other Work\GIS_SPECIALIST\SHAREPOINT_STATS\Rehab_stats\Outputs\Charts")
 output_folder.mkdir(parents=True, exist_ok=True)
 
 plt.figure(figsize=(12, 6))
