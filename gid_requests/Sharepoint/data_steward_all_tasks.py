@@ -5,7 +5,7 @@ import seaborn as sns
 
 print("🚀 Script started")
 
-file_path = Path(r"\\spatialfiles.bcgov\srm\wml\Workarea\ofedyshy\Other Work\GIS_SPECIALIST\SHAREPOINT_STATS\Rehab_stats\GIS_Requests_2026_04_02.csv")
+file_path = Path(r"\\spatialfiles.bcgov\srm\wml\Workarea\ofedyshy\Other Work\GIS_SPECIALIST\SHAREPOINT_STATS\Rehab_stats\GIS_Requests_2026_04_10.csv")
 
 if not file_path.exists():
     print("❌ File does NOT exist!")
@@ -31,8 +31,8 @@ matched_df = df.copy()
 
 print(f"✅ Matches found: {len(matched_df)}")
 
-start_date = pd.Timestamp("2025-06-01")
-end_date = pd.Timestamp("2026-03-31")
+start_date = pd.Timestamp("2025-04-01")
+end_date = pd.Timestamp.today()
 
 # Split into completed (in range) and pending (no date)
 completed_df = matched_df[
@@ -46,7 +46,7 @@ completed_df = matched_df[
 
 # Monthly aggregation
 completed_df["month"] = completed_df[date_col].dt.to_period("M").dt.to_timestamp()
-all_months = pd.date_range("2025-06-01", "2026-03-01", freq="MS")
+all_months = pd.date_range(start_date, end_date, freq="MS")   # ("2025-06-01", "2026-03-01", freq="MS")
 
 monthly_summary = (
     completed_df
