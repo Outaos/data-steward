@@ -6,7 +6,7 @@ print("🚀 Script started")
 # =========================
 # INPUT
 # =========================
-file_path = Path(r"\\spatialfiles.bcgov\srm\wml\Workarea\ofedyshy\Other Work\GIS_SPECIALIST\SHAREPOINT_STATS\Rehab_stats\GIS_Requests_2026_04_02.csv")
+file_path = Path(r"\\spatialfiles.bcgov\srm\wml\Workarea\ofedyshy\Other Work\GIS_SPECIALIST\SHAREPOINT_STATS\Rehab_stats\GIS_Requests_2026_07_02.csv")
 
 if not file_path.exists():
     print("❌ File does NOT exist!")
@@ -39,7 +39,9 @@ df[date_col] = pd.to_datetime(df[date_col], errors="coerce")
 # =========================
 filtered_df = df[
     (df[category_col].str.strip().str.lower() == "clearance") &
-    (df[date_col].dt.month == 3)
+    (df[date_col] >= pd.Timestamp("2025-05-01")) &
+    (df[date_col] <= pd.Timestamp.today())
+    #(df[date_col].dt.month == 3)
 ].copy()
 
 print(f"✅ Filtered rows (Clearance in March): {len(filtered_df)}")
@@ -50,7 +52,7 @@ print(f"✅ Filtered rows (Clearance in March): {len(filtered_df)}")
 output_folder = Path(r"\\spatialfiles.bcgov\srm\wml\Workarea\ofedyshy\Other Work\GIS_SPECIALIST\SHAREPOINT_STATS\Rehab_stats\Outputs")
 output_folder.mkdir(parents=True, exist_ok=True)
 
-output_path = output_folder / "clearance_requests_march.csv"
+output_path = output_folder / "clearance_requests_march_july.csv"
 
 filtered_df.to_csv(output_path, index=False)
 
